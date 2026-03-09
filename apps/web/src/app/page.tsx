@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Search, Plus, BookOpen, CheckCircle, XCircle, Edit, Trash2, User, Calendar } from 'lucide-react'
+import { AuthHeader } from './components/AuthHeader'
 
 // API configuration - will be updated for production
 const API_BASE =
@@ -95,7 +96,7 @@ export default function LibraryManagement() {
       setBooks(data.books || [])
     } catch (error) {
       console.error('Error fetching books:', error)
-      setError('Failed to fetch books. Please ensure the backend server is running at http://localhost:5000.')
+      setError(`Failed to fetch books. Could not connect to ${API_BASE}.`)
     }
     setLoading(false)
   }
@@ -265,7 +266,9 @@ export default function LibraryManagement() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen bg-gray-50">
+      <AuthHeader />
+    <div className="p-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -633,6 +636,7 @@ export default function LibraryManagement() {
           </DialogContent>
         </Dialog>
       </div>
+    </div>
     </div>
   )
 }
